@@ -18,7 +18,8 @@ class App extends Component {
     todoList.push(this.state.todoInput);
 
     this.setState({
-      todoList: todoList
+      todoList: todoList,
+      todoInput: ''
     });
 
   }
