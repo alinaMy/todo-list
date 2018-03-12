@@ -8,15 +8,16 @@ class App extends Component {
 
     this.state = {
       todoList: [],
-      todoInput: 'abc'
+      todoInput: ''
     };
   }
 
   addTodo() {
-    console.log('Click');
     const todoList = this.state.todoList;
-    todoList.push(this.state.todoInput);
 
+    // while(todoInput != ' ') {
+    //   todoList.push(this.state.todoInput);
+    // }
     this.setState({
       todoList: todoList,
       todoInput: ''
@@ -28,26 +29,28 @@ class App extends Component {
 
     console.log(this.state.todoList)
     return (
-      <div>
-        <input
-          type='text'
-          value={this.state.todoInput}
-          onChange={(e) => this.setState({ todoInput: e.target.value })}
+      <div className="container">
 
-        />
-        <button onClick={() => this.addTodo()}>Add</button>
+        <div className="input-group">
+          <input
+            className="form-control"
+            type='text'
+            value={this.state.todoInput}
+            onChange={(e) => this.setState({ todoInput: e.target.value })}
+          />
+          <div className="input-group-append">
+            <button className="btn btn-primary" onClick={() => this.addTodo()}>Add</button>
+          </div>
+        </div>
+          <ul>
+            {
+              this.state.todoList.map((el, i) => <li key={el + i}>{el}</li>)
+            }
+          </ul>
+      </div>
 
-        <ul>
-          {
-            this.state.todoList.map((el, i) => <li key={el + i}>{el}</li>)
+          );
+          }
           }
 
-
-        </ul>
-
-      </div>
-    );
-  }
-}
-
-export default App;
+          export default App;

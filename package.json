@@ -4,12 +4,13 @@
   "private": true,
   "homepage": "https://alinaMy.github.io/todo-list",
   "dependencies": {
+    "bootstrap": "^4.0.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-scripts": "1.1.1"
   },
   "scripts": {
-    "deploy" : "npm run build&&gh-pages -d build",
+    "deploy": "npm run build&&gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
