@@ -14,10 +14,21 @@ class App extends Component {
 
   addTodo() {
     const todoList = this.state.todoList;
+    const todoInput = this.state.todoInput;
+    let count = 0;
+    for(let i = 0; i < 4; i++){
+      if(todoInput === ' '){
+        count++;
+      }
+    }
 
-    // while(todoInput != ' ') {
-    //   todoList.push(this.state.todoInput);
-    // }
+    if (count === 3){
+      this.setState({
+        todoList: todoList,
+        todoInput: ''
+      });
+    }
+    todoList.push(this.state.todoInput);
     this.setState({
       todoList: todoList,
       todoInput: ''
@@ -29,8 +40,19 @@ class App extends Component {
 
     console.log(this.state.todoList)
     return (
-      <div className="container">
+      <div className="container pt-4">
 
+        <div className="row">
+          <div className="col-12  col-sm-6 col-md-4 border">
+
+          <ul>
+            {
+              this.state.todoList.map((el, i) => <li key={el + i}>{el}</li>)
+            }
+          </ul>
+          </div>
+
+          <div className="col-12 col-sm-6 col-md-4">
         <div className="input-group">
           <input
             className="form-control"
@@ -39,14 +61,11 @@ class App extends Component {
             onChange={(e) => this.setState({ todoInput: e.target.value })}
           />
           <div className="input-group-append">
-            <button className="btn btn-primary" onClick={() => this.addTodo()}>Add</button>
+            <button className="btn btn-outline-primary" onClick={() => this.addTodo()}>Add</button>
+          </div>
           </div>
         </div>
-          <ul>
-            {
-              this.state.todoList.map((el, i) => <li key={el + i}>{el}</li>)
-            }
-          </ul>
+        </div>
       </div>
 
           );
