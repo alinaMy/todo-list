@@ -8,32 +8,28 @@ class App extends Component {
 
     this.state = {
       todoList: [],
-      todoInput: ''
+      todoInput: '',
+      todoInputValid: false
     };
   }
 
   addTodo() {
     const todoList = this.state.todoList;
-    const todoInput = this.state.todoInput;
-    let count = 0;
-    for(let i = 0; i < 4; i++){
-      if(todoInput === ' '){
-        count++;
-      }
-    }
 
-    if (count === 3){
-      this.setState({
-        todoList: todoList,
-        todoInput: ''
-      });
-    }
     todoList.push(this.state.todoInput);
     this.setState({
       todoList: todoList,
       todoInput: ''
     });
 
+  }
+
+  inputChange(v){
+    let todoInputValid = v.trim().length >=3;
+    this.setState({
+      todoInput: v,
+      todoInputValid
+    })
   }
 
   render() {
@@ -58,10 +54,14 @@ class App extends Component {
             className="form-control"
             type='text'
             value={this.state.todoInput}
-            onChange={(e) => this.setState({ todoInput: e.target.value })}
+            onChange={(e) => this.inputChange(e.target.value)}
           />
           <div className="input-group-append">
-            <button className="btn btn-outline-primary" onClick={() => this.addTodo()}>Add</button>
+            <button
+              disabled = {!this.state.todoInputValid}
+              className = "btn btn-outline-primary"
+              onClick={() => this.addTodo()}>Add
+            </button>
           </div>
           </div>
         </div>
@@ -71,5 +71,4 @@ class App extends Component {
           );
           }
           }
-
           export default App;
