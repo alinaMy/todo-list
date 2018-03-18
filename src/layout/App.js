@@ -7,7 +7,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      todoList: [],
+      todoList: ['temp', 'new'],
       todoInput: '',
       todoInputValid: false
     };
@@ -19,7 +19,7 @@ class App extends Component {
     todoList.push(this.state.todoInput);
     this.setState({
       todoList: todoList,
-      todoInput: ''
+      todoInput: '',
     });
 
   }
@@ -30,6 +30,13 @@ class App extends Component {
       todoInput: v,
       todoInputValid
     })
+  }
+
+  deleteItem(todo){
+    console.log(todo)
+    const todoList = this.state.todoList.filter(el =>  el!==todo);
+    this.setState({todoList}, () => {console.log(this.state);});
+
   }
 
   render() {
@@ -43,7 +50,12 @@ class App extends Component {
 
           <ul>
             {
-              this.state.todoList.map((el, i) => <li key={el + i}>{el}</li>)
+              this.state.todoList.map((el, i) =>
+                <li key={el + i}>{el}
+                  <span className="btn btn-danger btn-sm"
+                        onClick={() => this.deleteItem(el)}
+                  >Delete</span>
+                  </li>)
             }
           </ul>
           </div>
